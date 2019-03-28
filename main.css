@@ -1,0 +1,45 @@
+html {
+	box-sizing: border-box;
+	font-size: 16px;
+	font-family: -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+body {
+	margin: 0;
+	padding: 5%;
+	font-weight: normal;
+	display: flex;
+	min-height: 100vh;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+button {
+	transition: background-color 0.3s ease-out;
+	background-color: #007bff;
+	border: 0;
+	border-radius: 3px;
+	color: white;
+	font: inherit;
+	font-weight: bold;
+	padding: 1rem 2rem;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+button:hover,
+button:focus {
+	background-color: #0069d9;
+}
+
+h1 {
+	font-size: 3rem;
+	margin: 2rem 0;
+}
