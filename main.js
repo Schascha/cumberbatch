@@ -17,10 +17,13 @@ const
 		},
 		store: [],
 		index: 0,
+		touchstartX: 0,
+		touchstartY: 0,
 
 		render(el) {
 			this.el = document.querySelector(el || 'h1');
-			document.addEventListener('keydown', (e) => this.onKeypress(e));
+			document.addEventListener('keydown', (e) => this._onKeypress(e));
+			window.addEventListener('touchstart touchend', (e) => this._onTouch(e));
 		},
 
 		generator() {
@@ -34,19 +37,49 @@ const
 			this.el.innerHTML = name;
 		},
 
-		onKeypress(e) {
-			// Left arrow
-			if (e.keyCode === 37 && this.index > 0) {
+		next() {
+			if (this.store.length && ++this.index < this.store.length) {
+				this.el.innerHTML = this.store[this.index];
+			} else {
+				this.generator();
+			}
+		},
+
+		prev() {
+			if (this.index > 0) {
 				this.el.innerHTML = this.store[--this.index];
 			}
+		},
 
-			// Right arrow
-			if (e.keyCode === 39) {
-				if (this.store.length && ++this.index < this.store.length) {
-					this.el.innerHTML = this.store[this.index];
-				} else {
-					this.generator();
-				}
+		_onKeypress(e) {
+			switch (e.keyCode) {
+				case 37:
+					// Left arrow
+					this.prev();
+					break;
+				case 39:
+					// Right arrow
+					this.next();
+					break;
+			}
+		},
+
+		_onTouch(e) {
+			switch (e.type) {
+				case 'touchstart':
+					this.touchstartX = e.changedTouches[0].screenX;
+					break;
+				case 'touchend':
+					this.touchendX = e.changedTouches[0].screenX;
+
+					if (this.touchendX < this.touchstartX) {
+						// Swipe left
+						this.next();
+					} else if (this.touchendX > this.touchstartX) {
+						// Swipe right
+						this.prev();
+					}
+					break;
 			}
 		}
 	}
