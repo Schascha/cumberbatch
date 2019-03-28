@@ -19,25 +19,32 @@ body {
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	background-color: #4cabef;
+	color: #fff;
 }
 
 button {
-	transition: background-color 0.3s ease-out;
-	background-color: #007bff;
-	border: 0;
+	transition: all 0.3s ease-out;
+	background-color: transparent;
+	border: 2px solid #fff;
 	border-radius: 3px;
-	color: white;
+	color: #fff;
 	cursor: pointer;
 	font: inherit;
 	font-weight: bold;
-	padding: 1rem 2rem;
+	padding: 1rem 3rem;
 	text-decoration: none;
 	text-transform: uppercase;
 }
 
 button:hover,
 button:focus {
-	background-color: #0069d9;
+	background-color: #fff;
+	color: #4cabef;
+}
+
+button:hover {
+	transform: scale(1.05);
 }
 
 div {
@@ -45,8 +52,14 @@ div {
 }
 
 h1 {
-	font-size: 3rem;
+	font-size: 5vw;
 	margin: 2rem 0;
+}
+
+@media screen and (max-width: 40em) {
+	h1 {
+		font-size: 2rem;
+	}
 }
 
 @keyframes fade-in {

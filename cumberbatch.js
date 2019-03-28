@@ -16,6 +16,7 @@ var cumberbatch = {
 	index: 0,
 	touchstartX: 0,
 	touchendX: 0,
+	touchDistance: 100,
 
 	render(el) {
 		this.el = document.querySelector(el || 'h1');
@@ -24,7 +25,7 @@ var cumberbatch = {
 		window.addEventListener('touchend', (e) => this._onTouchend(e));
 	},
 
-	generator() {
+	generate() {
 		const
 			rand = (arr) => (arr) ? arr[parseInt(Math.random() * arr.length)] : Math.floor(Math.random() * 10) + 1,
 			name = (rand() == 10) ? rand(this.names.full) : rand(this.names.first) + ' ' + rand(this.names.last)
@@ -39,7 +40,7 @@ var cumberbatch = {
 		if (this.store.length && ++this.index < this.store.length) {
 			this.el.innerHTML = this.store[this.index];
 		} else {
-			this.generator();
+			this.generate();
 		}
 	},
 
@@ -69,10 +70,10 @@ var cumberbatch = {
 	_onTouchend(e) {
 		this.touchendX = e.changedTouches[0].screenX;
 
-		if (this.touchendX < this.touchstartX) {
+		if (this.touchendX + this.touchDistance < this.touchstartX) {
 			// Swipe left
 			this.next();
-		} else if (this.touchendX > this.touchstartX) {
+		} else if (this.touchendX > this.touchstartX + this.touchDistance) {
 			// Swipe right
 			this.prev();
 		}
