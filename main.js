@@ -12,7 +12,7 @@ const
 			full: [
 				"Wimbledon Tennismatch", "Rinkydink Curdlesnoot", "Butawhiteboy Cantbekhan", "Benadryl Claritin", "Bombadil Rivendell", "Wanda's Crotchfruit", "Wanda's Crotchfruit", "Biblical Concubine", "Butawhite Cantbekhan", "Butawhiteboy Cantbekhan", "Benedict Timothy Carlton Cumberbatch", "Buckminster Fullerene", "Bourgeoisie Capitalist",
 
-				"Mark John Africa Lain"
+				"Mark John Africa Lain", "Reinhard Gosling", "Katie Price"
 			]
 		},
 		store: [],
