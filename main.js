@@ -18,12 +18,13 @@ const
 		store: [],
 		index: 0,
 		touchstartX: 0,
-		touchstartY: 0,
+		touchendX: 0,
 
 		render(el) {
 			this.el = document.querySelector(el || 'h1');
 			document.addEventListener('keydown', (e) => this._onKeypress(e));
-			window.addEventListener('touchstart touchend', (e) => this._onTouch(e));
+			window.addEventListener('touchstart', (e) => this._onTouchstart(e));
+			window.addEventListener('touchend', (e) => this._onTouchend(e));
 		},
 
 		generator() {
@@ -64,22 +65,19 @@ const
 			}
 		},
 
-		_onTouch(e) {
-			switch (e.type) {
-				case 'touchstart':
-					this.touchstartX = e.changedTouches[0].screenX;
-					break;
-				case 'touchend':
-					this.touchendX = e.changedTouches[0].screenX;
+		_onTouchstart(e) {
+			this.touchstartX = e.changedTouches[0].screenX;
+		},
 
-					if (this.touchendX < this.touchstartX) {
-						// Swipe left
-						this.next();
-					} else if (this.touchendX > this.touchstartX) {
-						// Swipe right
-						this.prev();
-					}
-					break;
+		_onTouchend(e) {
+			this.touchendX = e.changedTouches[0].screenX;
+
+			if (this.touchendX < this.touchstartX) {
+				// Swipe left
+				this.next();
+			} else if (this.touchendX > this.touchstartX) {
+				// Swipe right
+				this.prev();
 			}
 		}
 	}
