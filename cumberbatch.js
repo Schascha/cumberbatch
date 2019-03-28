@@ -24,6 +24,8 @@ var cumberbatch = {
 		document.addEventListener('keydown', (e) => this._onKeypress(e));
 		window.addEventListener('touchstart', (e) => this._onTouchstart(e));
 		window.addEventListener('touchend', (e) => this._onTouchend(e));
+
+		return this;
 	},
 
 	generate() {
