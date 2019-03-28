@@ -40,7 +40,21 @@ button:focus {
 	background-color: #0069d9;
 }
 
+div {
+	animation: fade-in 1s forwards ease-out;
+}
+
 h1 {
 	font-size: 3rem;
 	margin: 2rem 0;
+}
+
+@keyframes fade-in {
+	from {
+		opacity: 0;
+		transform: translate(0, 10%);
+	}
+	to {
+		opacity: 1;
+	}
 }
