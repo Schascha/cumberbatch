@@ -2,8 +2,6 @@
 
 https://schascha.github.io/cumberbatch/
 
-Cumberbatch as Browser Bookmark
-
 Inspired by http://benedictcumberbatchgenerator.tumblr.com/
 
 ## Cumberbatch as Browser Bookmark
