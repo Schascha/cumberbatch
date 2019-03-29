@@ -12,11 +12,12 @@
 	// Voice select
 	var
 		voices = [],
+		container = document.querySelector('#audio'),
 		voiceSelect = document.createElement('select')
 	;
 
 	voiceSelect.className = 'voices';
-	document.body.appendChild(voiceSelect);
+	container.appendChild(voiceSelect);
 
 	function populateVoiceList() {
 		voices = Synth.getVoices();
@@ -25,10 +26,6 @@
 			option.value = index;
 			option.textContent = `${voice.name} (${voice.lang})`;
 			voiceSelect.appendChild(option);
-
-			if (voice.name === 'Daniel') {
-				option.selected = true;
-			}
 		});
 	}
 
@@ -38,29 +35,22 @@
 	}
 
 	// Speak
-	var
-		el = document.querySelector('h1'),
-		isSpeaking = false
-	;
+	var button = document.querySelector('#speak');
 
-	el.onclick = function() {
-		if (isSpeaking) {
-			return;
-		}
+	button.onclick = function() {
+		button.disabled = true;
 
-		isSpeaking = true;
-
-		var speech = new Speech(el.innerHTML);
+		var speech = new Speech(document.querySelector('h1').innerHTML);
 
 		speech.voice = voices[parseInt(voiceSelect.value, 10)];
 		Synth.speak(speech);
 
 		speech.onend = function() {
-			isSpeaking = false;
+			button.disabled = false;
 		}
 
 		speech.onerror = function() {
-			isSpeaking = false;
+			button.disabled = false;
 		}
 	}
 })();
