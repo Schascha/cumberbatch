@@ -21,9 +21,12 @@ var cumberbatch = {
 
 	render(el) {
 		this.el = document.querySelector(el || 'h1');
-		document.addEventListener('keydown', (e) => this._onKeypress(e));
-		window.addEventListener('touchstart', (e) => this._onTouchstart(e));
-		window.addEventListener('touchend', (e) => this._onTouchend(e));
+
+		if (this.el) {
+			document.addEventListener('keydown', (e) => this._onKeypress(e));
+			window.addEventListener('touchstart', (e) => this._onTouchstart(e));
+			window.addEventListener('touchend', (e) => this._onTouchend(e));
+		}
 
 		return this;
 	},
@@ -36,12 +39,12 @@ var cumberbatch = {
 
 		this.store.push(name);
 		this.index = this.store.length - 1;
-		this.el.innerHTML = name;
+		this._update(name);
 	},
 
 	next() {
 		if (this.store.length && ++this.index < this.store.length) {
-			this.el.innerHTML = this.store[this.index];
+			this._update(this.store[this.index]);
 		} else {
 			this.generate();
 		}
@@ -49,7 +52,13 @@ var cumberbatch = {
 
 	prev() {
 		if (this.index > 0) {
-			this.el.innerHTML = this.store[--this.index];
+			this._update(this.store[--this.index]);
+		}
+	},
+
+	_update(name) {
+		if (this.el) {
+			this.el.innerHTML = name;
 		}
 	},
 
