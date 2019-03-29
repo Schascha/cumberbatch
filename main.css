@@ -80,19 +80,34 @@ svg {
 }
 
 .audio {
+	display: flex;
+	overflow: hidden;
 	position: absolute;
 	top: 1rem;
 	right: 1rem;
+	border: 2px solid #fff;
+	border-radius: 3px;
 }
 
-.audio button {
+.audio button,
+.audio select {
+	border-width: 0;
+	border-radius: 0;
+	font: inherit;
+	margin: 0;
 	padding: 0.5rem 1rem;
 }
 
 .audio select {
+	-webkit-appearance: none;
+	   -moz-appearance: none;
+			appearance: none;
+	background-color: transparent;
+	color: #fff;
 	max-width: 200px;
+	outline: 0;
+	border-left: 2px solid #fff;
 }
-
 
 @media screen and (max-width: 40em) {
 	h1 {
