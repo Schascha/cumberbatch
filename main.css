@@ -61,6 +61,13 @@ h1 {
 	margin: 2rem 0;
 }
 
+.voices {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	max-width: 200px;
+}
+
 @media screen and (max-width: 40em) {
 	h1 {
 		font-size: 2rem;
