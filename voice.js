@@ -1,56 +1,39 @@
-(() => {
+((w, d) => {
 	const
-		Synth = window.speechSynthesis,
-		Speech = window.SpeechSynthesisUtterance
+		Synth = w.speechSynthesis,
+		Speech = w.SpeechSynthesisUtterance
 	;
 
-	// Feature detection
 	if (!Synth || !Speech) {
 		return;
 	}
 
-	// Voice select
 	var
-		voices = [],
-		container = document.querySelector('#audio'),
-		voiceSelect = document.createElement('select')
+		button = d.querySelector('#audio'),
+		el = d.querySelector('h1'),
+		speech = new Speech()
 	;
 
-	voiceSelect.className = 'voices';
-	container.appendChild(voiceSelect);
+	speech.lang = 'en-GB';
 
-	function populateVoiceList() {
-		voices = Synth.getVoices();
-		voices.forEach((voice, index) => {
-			const option = document.createElement('option');
-			option.value = index;
-			option.textContent = `${voice.name} (${voice.lang})`;
-			voiceSelect.appendChild(option);
-		});
-	}
-
-	populateVoiceList();
-	if (window.speechSynthesis.onvoiceschanged !== undefined) {
-		window.speechSynthesis.onvoiceschanged = populateVoiceList;
-	}
-
-	// Speak
-	var button = document.querySelector('#speak');
-
-	button.onclick = function() {
-		button.disabled = true;
-
-		var speech = new Speech(document.querySelector('h1').innerHTML);
-
-		speech.voice = voices[parseInt(voiceSelect.value, 10)];
-		Synth.speak(speech);
-
-		speech.onend = function() {
-			button.disabled = false;
-		}
-
-		speech.onerror = function() {
-			button.disabled = false;
+	function speak() {
+		if (!button.disabled) {
+			speech.text = el.innerHTML;
+			button.disabled = true;
+			Synth.speak(speech);
 		}
 	}
-})();
+
+	button.onclick = speak;
+
+	speech.onend = function() {
+		button.disabled = false;
+	}
+
+	d.addEventListener('keydown', function(e) {
+		// Enter
+		if (e.keyCode === 13 && e.target === d.body) {
+			speak();
+		}
+	});
+})(window, document);
