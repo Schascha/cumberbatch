@@ -31,12 +31,17 @@ var cumberbatch = {
 		return this;
 	},
 
-	generate() {
+	random() {
 		const
 			rand = (arr) => (arr) ? arr[parseInt(Math.random() * arr.length)] : Math.floor(Math.random() * 10) + 1,
 			name = (rand() == 10) ? rand(this.names.full) : rand(this.names.first) + ' ' + rand(this.names.last)
 		;
 
+		return name;
+	},
+
+	generate() {
+		const name = this.random();
 		this.store.push(name);
 		this.index = this.store.length - 1;
 		this._update(name);
