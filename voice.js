@@ -1,8 +1,8 @@
-((w, d) => {
+(() => {
 	const
-		Synth = w.speechSynthesis,
-		Speech = w.SpeechSynthesisUtterance,
-		button = d.querySelector('#audio')
+		Synth = window.speechSynthesis,
+		Speech = window.SpeechSynthesisUtterance,
+		button = document.querySelector('#audio')
 	;
 
 	if (!Synth || !Speech) {
@@ -11,7 +11,7 @@
 	}
 
 	var
-		el = d.querySelector('h1'),
+		el = document.querySelector('h1'),
 		speech = new Speech()
 	;
 
@@ -31,10 +31,10 @@
 		button.disabled = false;
 	}
 
-	d.addEventListener('keydown', function(e) {
+	document.addEventListener('keydown', function(e) {
 		// Enter
-		if (e.keyCode === 13 && e.target === d.body) {
+		if (e.keyCode === 13 && e.target === document.body) {
 			speak();
 		}
 	});
-})(window, document);
+})();

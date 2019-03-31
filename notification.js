@@ -1,7 +1,7 @@
-((w, d) => {
-	const button = d.querySelector('#notification');
+(() => {
+	const button = document.querySelector('#notification');
 
-	if (!('Notification' in w)) {
+	if (!('Notification' in window)) {
 		button.disabled = true;
 		return;
 	}
@@ -19,9 +19,9 @@
 			notification.close();
 		}
 
-		notification = new w.Notification(cumberbatch.random());
+		notification = new window.Notification(cumberbatch.random());
 
-		w.setTimeout(notification.close.bind(notification), notificationDuration);
+		window.setTimeout(notification.close.bind(notification), notificationDuration);
 	}
 
 	button.addEventListener('click', function() {
@@ -29,7 +29,7 @@
 		if (button.classList.contains(classActive)) {
 			button.classList.remove(classActive);
 			button.blur();
-			w.clearInterval(intervalTimer);
+			window.clearInterval(intervalTimer);
 			return;
 		}
 
@@ -37,10 +37,10 @@
 		button.classList.add(classActive);
 
 		// Permission
-		if (w.Notification.permission === 'granted') {
+		if (window.Notification.permission === 'granted') {
 			notificate();
-		} else if (w.Notification.permission !== 'denied' || w.Notification.permission === 'default') {
-			w.Notification.requestPermission(function(permission) {
+		} else if (window.Notification.permission !== 'denied' || window.Notification.permission === 'default') {
+			window.Notification.requestPermission(function(permission) {
 				if (permission === 'granted') {
 					notificate();
 				}
@@ -48,7 +48,7 @@
 		}
 
 		// Interval
-		intervalTimer = w.setInterval(notificate, intervalDuration);
+		intervalTimer = window.setInterval(notificate, intervalDuration);
 	});
 
-})(window, document);
+})();
