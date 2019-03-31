@@ -1,15 +1,16 @@
 ((w, d) => {
 	const
 		Synth = w.speechSynthesis,
-		Speech = w.SpeechSynthesisUtterance
+		Speech = w.SpeechSynthesisUtterance,
+		button = d.querySelector('#audio')
 	;
 
 	if (!Synth || !Speech) {
+		button.disabled = true;
 		return;
 	}
 
 	var
-		button = d.querySelector('#audio'),
 		el = d.querySelector('h1'),
 		speech = new Speech()
 	;

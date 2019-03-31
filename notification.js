@@ -1,13 +1,15 @@
 ((w, d) => {
+	const button = d.querySelector('#notification');
+
 	if (!('Notification' in w)) {
+		button.disabled = true;
 		return;
 	}
 
 	var
-		button = d.querySelector('#notification'),
 		classActive = 'is-active',
 		notificationDuration = 4000,
-		intervalDuration = 10000,
+		intervalDuration = 60000,
 		intervalTimer,
 		notification
 	;
@@ -17,7 +19,7 @@
 			notification.close();
 		}
 
-		notification = new Notification(cumberbatch.random());
+		notification = new w.Notification(cumberbatch.random());
 
 		w.setTimeout(notification.close.bind(notification), notificationDuration);
 	}
@@ -35,10 +37,10 @@
 		button.classList.add(classActive);
 
 		// Permission
-		if (Notification.permission === 'granted') {
+		if (w.Notification.permission === 'granted') {
 			notificate();
-		} else if (Notification.permission !== 'denied' || Notification.permission === 'default') {
-			Notification.requestPermission(function(permission) {
+		} else if (w.Notification.permission !== 'denied' || w.Notification.permission === 'default') {
+			w.Notification.requestPermission(function(permission) {
 				if (permission === 'granted') {
 					notificate();
 				}
