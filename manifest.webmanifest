@@ -1,0 +1,19 @@
+{
+	"name": "Benedict Cumberbatch Name Generator",
+	"short_name": "Cumberbatch",
+	"icons": [
+		{
+			"src": "img/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "img/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	],
+	"theme_color": "#4cabef",
+	"background_color": "#ffffff",
+	"display": "standalone"
+}

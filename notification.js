@@ -19,7 +19,9 @@
 			notification.close();
 		}
 
-		notification = new window.Notification(cumberbatch.random());
+		notification = new window.Notification(cumberbatch.random(), {
+			icon: '/img/logo.png'
+		});
 
 		window.setTimeout(notification.close.bind(notification), notificationDuration);
 	}
