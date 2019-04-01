@@ -20,7 +20,7 @@
 		}
 
 		notification = new window.Notification(cumberbatch.random(), {
-			icon: '/img/logo.png'
+			icon: 'img/logo.png'
 		});
 
 		window.setTimeout(notification.close.bind(notification), notificationDuration);
