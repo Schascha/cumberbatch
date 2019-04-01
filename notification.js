@@ -9,7 +9,7 @@
 	var
 		classActive = 'is-active',
 		notificationDuration = 4000,
-		intervalDuration = 60000,
+		intervalDuration = 1000 * 60 * 15,
 		intervalTimer,
 		notification
 	;
