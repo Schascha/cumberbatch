@@ -1,4 +1,4 @@
-# Benedict Cumberbatch Name Generator
+# Cumberbatch Name Generator
 
 https://schascha.github.io/cumberbatch/
 
