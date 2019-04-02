@@ -2,7 +2,6 @@ var cumberbatch = cumberbatch || (() => {
 	var
 		store = [],
 		index = 0,
-		memoryStore = {},
 		touchstartX = 0,
 		touchendX = 0,
 		touchDistance = 100
@@ -38,7 +37,7 @@ var cumberbatch = cumberbatch || (() => {
 
 		random() {
 			const rand = Math.floor(Math.random() * 10) + 1;
-			return (rand === 10) ? this._memory('full') : this._memory('first') + ' ' + this._memory('last');
+			return (rand === 10) ? this._memory(this.names.full) : this._memory(this.names.first) + ' ' + this._memory(this.names.last);
 		},
 
 		generate() {
@@ -62,22 +61,12 @@ var cumberbatch = cumberbatch || (() => {
 			}
 		},
 
-		_memory(name, limit = 20) {
+		_memory(obj, limit = 20) {
 			const
-				size = this.names[name].length,
-				memory = memoryStore[name] || [],
-				arr = this.names[name].filter((el) => memory.indexOf(el) === -1),
+				memory = store.slice((obj.length > limit) ? -limit : -obj.length / 2).join(),
+				arr = obj.filter((el) => memory.indexOf(el) === -1),
 				str = arr[parseInt(Math.random() * arr.length)]
 			;
-
-			memory.push(str);
-
-			// Remove first element from memory if limit is reached
-			if (memory.length > ((limit > size) ? size / 2 : limit)) {
-				memory.shift();
-			}
-
-			memoryStore[name] = memory;
 
 			return str;
 		},
