@@ -1,14 +1,6 @@
 var cumberbatch = cumberbatch || (() => {
 	var
-		store = [],
-		index = 0,
-		touchstartX = 0,
-		touchendX = 0,
-		touchDistance = 100
-	;
-
-	return {
-		names: {
+		names = {
 			first: [
 				"Bakery", "Bandersnatch", "Bandicoot", "Barbituate", "Barister", "Barnabus", "Barnacle", "Barnoldswick", "Baseballbat", "Baseballmitt", "Bedlington", "Beetlejuice", "Beezlebub", "Benadryl", "Bendandsnap", "Bendydick", "Benetton", "Benjamin", "Bentobox", "Bettyboop", "Billiardball", "Billybong", "Billyray", "Blasphemy", "Blenderdick", "Blubberbutt", "Blubberdick", "Blubberwhale", "Bodybuild", "Boilerdang", "Bombadil", "Bonaparte", "Boobytrap", "Botany", "Bouillabaisse", "Bourgeoisie", "Brandenburg", "Brandybuck", "Brendadirk", "Brewery", "Broccoli", "Bubblebath", "Buckingham", "Buckminster", "Buckyball", "Budapest", "Buffalo", "Bukkake", "Bulbasaur", "Bumberstump", "Bumblebee", "Bumblebee", "Bumbleshack", "Bumblesniff", "Bunsenburner", "Burberry", "Burgerking", "Burlington", "Buttercup", "Butterfree", "Buttermilk", "Cadbury", "Cogglesnatch", "Congleton", "Danglerack", "Fiddlestick", "Fragglerock", "Honkytonk", "Johnnycash", "Liverswort", "Muffintop", "Oscarbait", "Pallettown", "Rinkydink", "Rumblesack", "Snorkeldink", "Snozzlebert", "Syphilis", "Tiddleywomp", "Timothy", "Wellington", "Whippersnatch", "Wimbledon",
 				"Bacardi", "Bagelbread", "Bagleface", "Barliman", "Bellybutton", "Benedick", "Berrywinkle", "Billyboy", "Booblesnoot", "Blueberry", "Blunderbrick", "Bobafett", "Bobbypin", "Brownbear", "Bumblesnuff", "Bumfuzzle", "Butterscotch", "Canterbury", "Carpettrip", "Cheesecake", "Choclaitchip", "Cockapoo", "Cordula", "Dinglebird", "Dumbledore", "Engelbert", "Gobbledygook", "Hodgepodge", "Hullabaloo", "Hummingbird", "Igglybuff", "Lemontree", "Longdong", "Massachusetts", "Poppycock", "Quitsack", "Ragnarök", "Ronald", "Singlehandedly", "Stinkyfruit", "Stinkytoe", "Taradiddle", "Widdershins"
@@ -22,46 +14,17 @@ var cumberbatch = cumberbatch || (() => {
 				"Benedick Cucumberbatch", "Blueberry Pumpkinpatch", "Britishname Complicated", "Butterscotch Candywrap", "Engelbert Humperdinck", "Itsy Bitsy Teenie Weenie", "Katie Price", "Mark John Africa Lein", "Reinhard Gosling", "Ryan Stecken"
 			]
 		},
+		store = [],
+		index = 0,
+		touchstartX = 0,
+		touchendX = 0,
+		touchDistance = 100,
+		cb
+	;
 
-		render(el) {
-			this.el = document.querySelector(el || 'h1');
-
-			if (this.el) {
-				document.addEventListener('keydown', (e) => this._onKeypress(e));
-				window.addEventListener('touchstart', (e) => this._onTouchstart(e));
-				window.addEventListener('touchend', (e) => this._onTouchend(e));
-			}
-
-			return this;
-		},
-
-		random() {
-			const rand = Math.floor(Math.random() * 10) + 1;
-			return (rand === 10) ? this._memory(this.names.full) : this._memory(this.names.first) + ' ' + this._memory(this.names.last);
-		},
-
-		generate() {
-			const name = this.random();
-			store.push(name);
-			index = store.length - 1;
-			this._update(name);
-		},
-
-		next() {
-			if (store.length && ++index < store.length) {
-				this._update(store[index]);
-			} else {
-				this.generate();
-			}
-		},
-
-		prev() {
-			if (index > 0) {
-				this._update(store[--index]);
-			}
-		},
-
-		_memory(obj, limit = 20) {
+	// Private Methods
+	cb =  {
+		_name(obj, limit = 30) {
 			const
 				memory = store.slice((obj.length > limit) ? -limit : -obj.length / 2).join(),
 				arr = obj.filter((el) => memory.indexOf(el) === -1),
@@ -71,9 +34,9 @@ var cumberbatch = cumberbatch || (() => {
 			return str;
 		},
 
-		_update(name) {
-			if (this.el) {
-				this.el.innerHTML = name;
+		_update(el, str) {
+			if (el) {
+				el.innerHTML = str;
 			}
 		},
 
@@ -105,5 +68,46 @@ var cumberbatch = cumberbatch || (() => {
 				this.prev();
 			}
 		}
+	};
+
+	// Public Methods
+	return {
+		render(el) {
+			this.el = document.querySelector(el || 'h1');
+
+			if (this.el) {
+				document.addEventListener('keydown', cb._onKeypress.bind(this));
+				window.addEventListener('touchstart', cb._onTouchstart.bind(this));
+				window.addEventListener('touchend', cb._onTouchend.bind(this));
+			}
+
+			return this;
+		},
+
+		random() {
+			const rand = Math.floor(Math.random() * 10) + 1;
+			return (rand === 10) ? cb._name(names.full) : cb._name(names.first) + ' ' + cb._name(names.last);
+		},
+
+		generate() {
+			const name = this.random();
+			store.push(name);
+			index = store.length - 1;
+			cb._update(this.el, name);
+		},
+
+		next() {
+			if (store.length && ++index < store.length) {
+				cb._update(this.el, store[index]);
+			} else {
+				this.generate();
+			}
+		},
+
+		prev() {
+			if (index) {
+				cb._update(this.el, store[--index]);
+			}
+		},
 	};
 })();

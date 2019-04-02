@@ -9,7 +9,6 @@
 	var
 		classActive = 'is-active',
 		notificationDuration = 6000,
-		intervalDuration = 1000 * 60 * 15,
 		intervalTimer,
 		notification
 	;
@@ -47,6 +46,7 @@
 		}
 
 		permission(() => {
+			const intervalDuration = Math.max(1, parseInt(button.getAttribute('data-interval')) || 10) * 60000;
 			button.classList.add(classActive);
 			sendNotification();
 			intervalTimer = window.setInterval(sendNotification, intervalDuration);
