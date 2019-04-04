@@ -11,7 +11,7 @@ Thanks for dozens of hours coding fun.
 Create bowser bookmark and copy following code as URL:
 
 ```html
-javascript:if(typeof cumberbatch==='undefined'){var s=document.createElement('script');s.src='https://schascha.github.io/cumberbatch/cumberbatch.js';s.onload=function() {cumberbatch.render();cumberbatch.generate()};document.body.appendChild(s);}else{cumberbatch.generate();}
+javascript:if(typeof Cumberbatch==='undefined'){var s=document.createElement('script');s.src='https://schascha.github.io/cumberbatch/cumberbatch.js';s.onload=function() {new Cumberbatch().generate()};document.body.appendChild(s);}else{new Cumberbatch.generate();}
 ```
 
 ## Bugs or name suggestions?

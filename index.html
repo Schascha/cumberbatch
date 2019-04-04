@@ -65,8 +65,9 @@
 		<script src="voice.js"></script>
 		<script src="notification.js"></script>
 		<script>
-			cumberbatch.render();
-			document.getElementById('generator').addEventListener('click', () => cumberbatch.generate());
+			var cumberbatch = new Cumberbatch();
+			document.getElementById('generator').addEventListener('click', cumberbatch.generate);
+			new Cumberbatch().generate();
 		</script>
 	</body>
 </html>
