@@ -1,7 +1,7 @@
 (function(cumberbatch) {
 	const button = document.querySelector('#notification');
 
-	if (!('Notification' in window) || !Cumberbatch) {
+	if (!('Notification' in window) || !cumberbatch) {
 		button.disabled = true;
 		return;
 	}
