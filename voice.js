@@ -1,4 +1,4 @@
-(() => {
+(function() {
 	const
 		Synth = window.speechSynthesis,
 		Speech = window.SpeechSynthesisUtterance,
