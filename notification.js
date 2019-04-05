@@ -1,4 +1,4 @@
-((Cumberbatch) => {
+((cumberbatch) => {
 	const button = document.querySelector('#notification');
 
 	if (!('Notification' in window) || !Cumberbatch) {
@@ -53,4 +53,4 @@
 		});
 	});
 
-})(window.Cumberbatch);
+})(window.cumberbatch);
