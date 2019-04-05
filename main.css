@@ -13,6 +13,7 @@ html {
 }
 
 body {
+	animation: background-color 60s infinite;
 	margin: 0;
 	padding: 3.5rem 1rem;
 	font-weight: normal;
@@ -24,7 +25,7 @@ body {
 	-ms-flex-pack: center;
 		justify-content: center;
 	text-align: center;
-	background-color: #4cabef;
+	background-color: #4CABEF;
 	color: #fff;
 }
 
@@ -60,7 +61,7 @@ button:hover,
 button:focus,
 button.is-active {
 	background-color: #fff;
-	color: #4cabef;
+	color: #4CABEF;
 }
 
 button:hover {
@@ -141,5 +142,59 @@ svg {
 	}
 	to {
 		opacity: 1;
+	}
+}
+
+@-webkit-keyframes background-color {
+	14%,
+	90% {
+		background-color: #4CABEF;
+	}
+	15%,
+	29% {
+		background-color: #462656;
+	}
+	30%,
+	44% {
+		background-color: #FA8067;
+	}
+	45%,
+	59% {
+		background-color: #00BC9B;
+	}
+	60%,
+	74% {
+		background-color: #5CB75E;
+	}
+	75%,
+	89% {
+		background-color: #113f67;
+	}
+}
+
+@keyframes background-color {
+	14%,
+	90% {
+		background-color: #4CABEF;
+	}
+	15%,
+	29% {
+		background-color: #462656;
+	}
+	30%,
+	44% {
+		background-color: #FA8067;
+	}
+	45%,
+	59% {
+		background-color: #00BC9B;
+	}
+	60%,
+	74% {
+		background-color: #5CB75E;
+	}
+	75%,
+	89% {
+		background-color: #113f67;
 	}
 }
