@@ -45,7 +45,7 @@
 			return;
 		}
 
-		permission(() => {
+		permission(function() {
 			const intervalDuration = Math.max(1, parseInt(button.getAttribute('data-interval')) || 10) * 60000;
 			button.classList.add(classActive);
 			sendNotification();
