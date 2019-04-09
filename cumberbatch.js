@@ -44,32 +44,69 @@
 
 		// Private Methods
 		cb = {
+
+			/**
+			 * Returns random name
+			 * @return {string}
+			 */
 			random() {
 				var rand = Math.floor(Math.random() * 10) + 1;
 				return (rand === 10) ? cb._name(names.full) : cb._name(names.first) + ' ' + cb._name(names.last);
 			},
 
+			/**
+			 * Display a random storable name
+			 * @return {this}
+			 */
 			generate() {
 				var name = cb.random();
 				store.push(name);
 				index = store.length - 1;
 				cb._update(name);
+				return this;
 			},
 
+			/**
+			 * Display next name from storage or generate a new one
+			 * @return {this}
+			 */
 			next() {
 				if (store.length && ++index < store.length) {
 					cb._update(store[index]);
 				} else {
 					cb.generate();
 				}
+
+				return this;
 			},
 
+			/**
+			 * Display previous name from storage
+			 * @return {this}
+			 */
 			prev() {
 				if (index) {
 					cb._update(store[--index]);
 				}
+
+				return this;
 			},
 
+			/**
+			 * Display first name from storage
+			 * @return {this}
+			 */
+			first() {
+				index = 0;
+				cb._update(store[index]);
+				return this;
+			},
+
+			/**
+			 * Initialize event bindings
+			 * @private
+			 * @return {undefined}
+			 */
 			_init() {
 				if (el) {
 					document.addEventListener('keydown', cb._onKeypress);
@@ -78,11 +115,20 @@
 				}
 			},
 
+			/**
+			 * Returns unique random name string
+			 * @private
+			 * @param  {array} obj
+			 * @param  {number} [limit=50]
+			 * @return {string}
+			 */
 			_name(obj, limit = 50) {
 				var
 					memory = store.slice((obj.length > limit) ? -limit : -obj.length / 2).join(),
 					arr = obj.filter(function(el) {
-						return memory.indexOf(el) === -1;
+						return el.split(' ').filter(function(a) {
+							return memory.indexOf(a) === -1;
+						}).length;
 					}),
 					str = arr[parseInt(Math.random() * arr.length)]
 				;
@@ -90,12 +136,24 @@
 				return str;
 			},
 
+			/**
+			 * Display string as HTML
+			 * @private
+			 * @param  {string} str
+			 * @return {undefined}
+			 */
 			_update(str) {
-				if (el) {
+				if (el && str) {
 					el.innerHTML = str;
 				}
 			},
 
+			/**
+			 * Keypress event handler
+			 * @private
+			 * @param  {object} e
+			 * @return {undefined}
+			 */
 			_onKeypress(e) {
 				switch (e.keyCode) {
 					case 37:
@@ -109,10 +167,22 @@
 				}
 			},
 
+			/**
+			 * Touchstart event handler
+			 * @private
+			 * @param  {object} e
+			 * @return {undefined}
+			 */
 			_onTouchstart(e) {
 				touchstartX = e.changedTouches[0].screenX;
 			},
 
+			/**
+			 * Touchend event handler
+			 * @private
+			 * @param  {object} e
+			 * @return {undefined}
+			 */
 			_onTouchend(e) {
 				touchendX = e.changedTouches[0].screenX;
 
@@ -126,7 +196,7 @@
 			}
 		};
 
-		// Init
+		// Initialize
 		cb._init();
 
 		// Public Methods
@@ -134,7 +204,8 @@
 			generate: cb.generate,
 			random: cb.random,
 			prev: cb.prev,
-			next: cb.next
+			next: cb.next,
+			first: cb.first
 		};
 	}
 
