@@ -18,10 +18,12 @@ javascript:if(typeof cumberbatch==='undefined'){var cumberbatch,s=document.creat
 
 Please let me know: https://github.com/Schascha/cumberbatch/issues
 
-## :coffee: Buy me a Coffee
+## Buy me a Coffee :coffee:
 
 Support this project and [others](https://github.com/Schascha?tab=repositories) via [PayPal](https://www.paypal.me/LosZahlos). Thanks
 
 ## License
 
 [MIT](./LICENSE)
+
+Copyright (c) 2019 Sascha Künstler
