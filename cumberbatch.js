@@ -140,7 +140,7 @@
 					"Burberry",
 					"Burgerking",
 					"Burlington",
-					"Bushtit"
+					"Bushtit",
 					"Buttercup",
 					"Butterdick",
 					"Butterfree",
