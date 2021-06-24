@@ -381,6 +381,7 @@
 					"Rubberband",
 					"Rubberbeak",
 					"Rubberduck",
+					"Rubbernecker",
 					"Rummelsburg",
 					"Rummelsnuff",
 					"Sabretooth",
